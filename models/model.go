@@ -6,7 +6,7 @@ type Message struct {
 	ID        string   `json:"id"`
 	Content   string  `json:"content"`
 	Timestamp int64  `json:"timestamp"`
-	Status   string  `json:"status" `
+	Status   string  `json:"status"`
 }
 
 

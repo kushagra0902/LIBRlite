@@ -2,18 +2,22 @@ package database
 
 import (
 	"context"
+	"fmt"
 	"github/Kushagra0902/LIBRlite/models"
 )
 
 func InsertMessage(msg *models.Message) bool{
+	fmt.Println("Inserting Data")
 	content:= msg.Content
 	timestamp:= msg.Timestamp
 	uuid := msg.ID
 	status := msg.Status
 
-	QueryString:= `INSERT INTO messages(uuid content timestamp status) VALUES($1 $2 $3 $4)`
+	QueryString:= `INSERT INTO messages(id ,content, "timestamp" , status) VALUES($1, $2, $3, $4)`
 	_,err:= Pool.Exec(context.Background(), QueryString, uuid, content, timestamp, status)
-
+	if err!=nil{
+		panic(err)
+	}
 return err == nil //compares both and then if equal, returns true
 }
 
