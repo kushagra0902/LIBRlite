@@ -17,6 +17,11 @@ type ModReturn struct {
 	Status   string  `json:"status"`
 }
 
+type ResponseClient struct {
+	ID        string   `json:"id"`
+	Timestamp int64  `json:"timestamp"`
+	Status   string  `json:"status"`
+}
 
 
 

@@ -22,7 +22,7 @@ return err == nil //compares both and then if equal, returns true
 }
 
 func GetMessage(ts int64) (*[]models.Message,string){
-QueryString:=`Select * FROM messages WHERE timestamp=($1) AND status=Verified`
+QueryString:=`Select * FROM messages WHERE timestamp=($1) AND status='Approved'`
 rows, err := Pool.Query(context.Background(), QueryString, ts)
 
 if err!=nil{
@@ -43,8 +43,30 @@ for rows.Next() {
 return &messages, "Success"
 }
 
+func GetAllMessages() *[]models.Message{
+QueryString:=`Select * FROM messages WHERE status='Approved'`
+rows,err:= Pool.Query(context.Background(),QueryString)
+
+if err!=nil{
+	fmt.Println("Error getting all msgs")
+	return nil
+}
+var allMessages []models.Message
+var message models.Message
 
 
+for rows.Next(){
+	err2:=rows.Scan(&message.ID, &message.Content, &message.Timestamp,&message.Status)
+	if err2!=nil{
+		fmt.Println("Error getting data from rows")
+	}
+
+	allMessages = append(allMessages, message)
+	
+
+}
+return &allMessages
+}
 
 
 

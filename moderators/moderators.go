@@ -1,7 +1,7 @@
 package moderators
 
 import (
-	"fmt"
+	
 	"github/Kushagra0902/LIBRlite/models"
 	"math/rand/v2"
 	"sync"
@@ -11,7 +11,7 @@ import (
 )
 
 func Validate(msg *models.Message) (*[]models.ModReturn, string) {
-	fmt.Println("Hello from mod file start")
+	//fmt.Println("Hello from mod file start")
 
 	var wg sync.WaitGroup
 	var ModResponses = new([]models.ModReturn)
@@ -39,7 +39,7 @@ func Validate(msg *models.Message) (*[]models.ModReturn, string) {
 			response.MessageID = m.ID
 			responseChan <- response
 
-			fmt.Println("Hello from mod")
+			//fmt.Println("Hello from mod")
 		}()
 	}
 
@@ -51,7 +51,7 @@ func Validate(msg *models.Message) (*[]models.ModReturn, string) {
 	// Wait for all goroutines to finish
 	wg.Wait()
 	close(responseChan)
-	fmt.Println("Hello from mod file end")
+	//fmt.Println("Hello from mod file end")
 
 	// Collect responses
 	var Approved_counter int
